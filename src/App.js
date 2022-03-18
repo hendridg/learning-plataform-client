@@ -1,49 +1,21 @@
-import { useEffect } from "react";
-import "./App.css";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addCourse,
-  selectCourses,
-  fetchApiCourses,
-} from "./redux/courses/courses";
+import { useEffect } from 'react';
+import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCourses, fetchApiCourses } from './redux/courses/courses';
 import {
   addTutor,
-  editTutor,
-  deleteTutor,
   fetchApiTutors,
+  fetchPostTutor,
   selectTutors,
-} from "./redux/tutors/tutors";
+} from './redux/tutors/tutors';
 
 function App() {
   const dispatch = useDispatch();
   const courses = useSelector(selectCourses);
+  const tutors = useSelector(selectTutors);
   useEffect(() => {
     dispatch(fetchApiCourses());
     dispatch(fetchApiTutors());
-    // dispatch(
-    //   addCourse({
-    //     id: 3,
-    //     name: "Phy",
-    //     date: "2022-03-05",
-    //     hour: "9:00-10:00",
-    //     tutor: "John Master",
-    //   })
-    // );
-    // dispatch(
-    //   addTutor({
-    //     tutor_id: "12ju234442fff",
-    //     name: "Stephen H. Kind ",
-    //     tutor_sn: "ncipom",
-    //   })
-    // );
-    // dispatch(
-    //   editTutor({
-    //     tutor_id: "12ju234442fff",
-    //     name: "Stephen J. Kind",
-    //     tutor_sn: "sldkjfkp",
-    //   })
-    // );
-    // dispatch(deleteTutor("1223442"));
   }, []);
 
   return (
@@ -52,6 +24,30 @@ function App() {
       {courses.map((course) => (
         <p key={course.id}>{course.name}</p>
       ))}
+      <button
+        type="button"
+        onClick={() => {
+          if (tutors.find((tutor) => tutor.tutor_sn === 'ncipom')) {
+            return alert('Tutor already exist!');
+          }
+          dispatch(
+            addTutor({
+              id: 121212,
+              name: 'Stephen H. Kind ',
+              tutor_sn: 'ncipom',
+            }),
+          );
+          return dispatch(
+            fetchPostTutor({
+              id: 121212,
+              name: 'Stephen H. Kind ',
+              tutor_sn: 'ncipom',
+            }),
+          );
+        }}
+      >
+        add tutor
+      </button>
     </div>
   );
 }

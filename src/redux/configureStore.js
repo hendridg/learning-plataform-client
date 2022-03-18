@@ -1,7 +1,7 @@
-import { configureStore } from "@reduxjs/toolkit";
-import logger from "redux-logger";
-import reducerCourses from "./courses/courses";
-import reducerTutors from "./tutors/tutors";
+import { configureStore } from '@reduxjs/toolkit';
+import logger from 'redux-logger';
+import reducerCourses from './courses/courses';
+import reducerTutors from './tutors/tutors';
 
 const store = configureStore({
   reducer: {
