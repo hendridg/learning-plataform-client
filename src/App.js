@@ -1,18 +1,17 @@
 import { useEffect } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './App.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCourses, fetchApiCourses } from './redux/courses/courses';
+import { useDispatch } from 'react-redux';
+import { fetchApiCourses } from './redux/courses/courses';
+import { fetchApiTutors } from './redux/tutors/tutors';
 import {
-  addTutor,
-  fetchApiTutors,
-  fetchPostTutor,
-  selectTutors,
-} from './redux/tutors/tutors';
+  Courses, Tutors, Students, Querys,
+} from './pages';
+import NavBar from './components/NavBar';
 
-function App() {
+const App = () => {
   const dispatch = useDispatch();
-  const courses = useSelector(selectCourses);
-  const tutors = useSelector(selectTutors);
+
   useEffect(() => {
     dispatch(fetchApiCourses());
     dispatch(fetchApiTutors());
@@ -20,36 +19,18 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Hello App</h1>
-      {courses.map((course) => (
-        <p key={course.id}>{course.name}</p>
-      ))}
-      <button
-        type="button"
-        onClick={() => {
-          if (tutors.find((tutor) => tutor.tutor_sn === 'ncipom')) {
-            return alert('Tutor already exist!');
-          }
-          dispatch(
-            addTutor({
-              id: 121212,
-              name: 'Stephen H. Kind ',
-              tutor_sn: 'ncipom',
-            }),
-          );
-          return dispatch(
-            fetchPostTutor({
-              id: 121212,
-              name: 'Stephen H. Kind ',
-              tutor_sn: 'ncipom',
-            }),
-          );
-        }}
-      >
-        add tutor
-      </button>
+      <BrowserRouter>
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Courses />} />
+          <Route path="/tutors" element={<Tutors />} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/querys" element={<Querys />} />
+          <Route path="/*" element={<h1>Not Found</h1>} />
+        </Routes>
+      </BrowserRouter>
     </div>
   );
-}
+};
 
 export default App;
