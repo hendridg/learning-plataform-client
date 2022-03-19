@@ -6,7 +6,9 @@ const WrapperNav = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #1f1f1f;
+  /* background: #1f1f1f; */
+  background: #228be6;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   padding: 1rem 2rem;
 `;
 
