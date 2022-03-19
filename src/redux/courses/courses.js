@@ -13,6 +13,20 @@ export const fetchApiCourses = createAsyncThunk(
   },
 );
 
+export const fetchPostCourse = createAsyncThunk(
+  'course/fetchPostCourse',
+  async (course) => {
+    const response = await fetch('http://localhost:8000/courses', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(course),
+    }).then((res) => res.json());
+    return response;
+  },
+);
+
 const coursesSlice = createSlice({
   name: 'courses',
   initialState,
@@ -34,6 +48,8 @@ const coursesSlice = createSlice({
           name: course.name,
           date: course.date,
           hour: course.hour,
+          tutor: course.tutor,
+          tutor_sn: course.tutor_sn,
           description: course.description,
         }));
         return {
@@ -41,7 +57,19 @@ const coursesSlice = createSlice({
           statusCallApiCourses: 'done',
           courses: arrayCourses,
         };
-      });
+      })
+      .addCase(fetchPostCourse.pending, (state) => ({
+        ...state,
+        statusPostCourse: 'proccess',
+      }))
+      .addCase(fetchPostCourse.fulfilled, (state) => ({
+        ...state,
+        statusPostCourse: 'Create',
+      }))
+      .addCase(fetchPostCourse.rejected, (state, action) => ({
+        ...state,
+        statusPostCourse: action.payload,
+      }));
   },
 });
 
