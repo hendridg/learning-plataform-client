@@ -3,6 +3,8 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 const initialState = {
   statusCallApiTutors: 'idle',
   statusPostTutor: 'idle',
+  statusDeleteTutor: 'idle',
+  statusPutTutor: 'idle',
   tutors: [],
   repeatTutor: false,
 };
@@ -24,6 +26,30 @@ export const fetchPostTutor = createAsyncThunk(
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(tutor),
+    }).then((res) => res.json());
+    return response;
+  },
+);
+
+export const fetchPutTutor = createAsyncThunk(
+  'tutor/fetchPutTutor',
+  async (tutor) => {
+    const response = await fetch(`http://localhost:8000/tutors/${tutor.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(tutor),
+    }).then((res) => res.json());
+    return response;
+  },
+);
+
+export const fetchDeleteTutor = createAsyncThunk(
+  'tutor/fetchDeleteTutor',
+  async (id) => {
+    const response = await fetch(`http://localhost:8000/tutors/${id}`, {
+      method: 'DELETE',
     }).then((res) => res.json());
     return response;
   },
@@ -57,12 +83,12 @@ const tutorsSlice = createSlice({
             && tutor.tutor_id !== action.payload.tutor_id,
         )
       ) {
-        alert('Secure number already exist!');
         return state;
       }
       const newTutors = state.tutors.map((tutor) => {
         if (tutor.id === action.payload.id) {
           return {
+            id: action.payload.id,
             name: action.payload.name,
             tutor_sn: action.payload.tutor_sn,
           };
@@ -76,13 +102,25 @@ const tutorsSlice = createSlice({
     },
     deleteTutor: (state, action) => {
       const newTutors = state.tutors.filter(
-        (tutor) => tutor.tutor_id !== action.payload,
+        (tutor) => tutor.id !== action.payload,
       );
       return {
         ...state,
         tutors: newTutors,
       };
     },
+    initStatusPostTutor: (state) => ({
+      ...state,
+      statusPostTutor: 'idle',
+    }),
+    initStatusDeleteTutor: (state) => ({
+      ...state,
+      statusDeleteTutor: 'idle',
+    }),
+    initStatusPutTutor: (state) => ({
+      ...state,
+      statusPutTutor: 'idle',
+    }),
   },
   extraReducers: (builder) => {
     builder
@@ -92,6 +130,7 @@ const tutorsSlice = createSlice({
       }))
       .addCase(fetchApiTutors.fulfilled, (state, action) => {
         const arrayTutors = action.payload.map((tutor) => ({
+          id: tutor.id,
           name: tutor.name,
           tutor_sn: tutor.tutor_sn,
         }));
@@ -105,20 +144,48 @@ const tutorsSlice = createSlice({
         ...state,
         statusPostTutor: 'proccess',
       }))
-      .addCase(fetchPostTutor.fulfilled, (state) => ({
+      .addCase(fetchPostTutor.fulfilled, (state, action) => ({
         ...state,
-        statusPostTutors: 'Create',
+        tutors: [...state.tutors, action.payload],
+        statusPostTutor: 'Create',
       }))
       .addCase(fetchPostTutor.rejected, (state, action) => ({
         ...state,
         statusPostTutor: action.payload,
+      }))
+      .addCase(fetchDeleteTutor.pending, (state) => ({
+        ...state,
+        statusDeleteTutor: 'proccess',
+      }))
+      .addCase(fetchDeleteTutor.fulfilled, (state) => ({
+        ...state,
+        statusDeleteTutor: 'Delete',
+      }))
+      .addCase(fetchPutTutor.pending, (state) => ({
+        ...state,
+        statusPutTutor: 'proccess',
+      }))
+      .addCase(fetchPutTutor.fulfilled, (state) => ({
+        ...state,
+        statusPutTutor: 'Edit',
       }));
   },
 });
 
-export const { addTutor, editTutor, deleteTutor } = tutorsSlice.actions;
+export const {
+  addTutor,
+  editTutor,
+  deleteTutor,
+  initStatusPostTutor,
+  initStatusDeleteTutor,
+  initStatusPutTutor,
+} = tutorsSlice.actions;
 export const selectTutors = (state) => state.tutors.tutors;
 export const selectRepeatTutor = (state) => state.tutors.repeatTutor;
-export const selectStatusCallApiTutors = (state) => state.courses.selectStatusCallApiTutors;
+export const selectStatusCallApiTutors = (state) => state.tutors.statusCallApiTutors;
+export const selectStatusPostTutor = (state) => state.tutors.statusPostTutor;
+
+export const selectStatusPutTutor = (state) => state.tutors.statusPutTutor;
+export const selectStatusDeleteTutor = (state) => state.tutors.statusDeleteTutor;
 
 export default tutorsSlice.reducer;

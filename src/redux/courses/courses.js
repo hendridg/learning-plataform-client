@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
   statusCallApiCourses: 'idle',
+  statusPostCourse: 'idle',
   courses: [],
 };
 
@@ -34,6 +35,10 @@ const coursesSlice = createSlice({
     addCourse: (state, action) => ({
       ...state,
       courses: [...state.courses, action.payload],
+    }),
+    initStatusPostCourse: (state) => ({
+      ...state,
+      statusPostTutor: 'idle',
     }),
   },
   extraReducers: (builder) => {
@@ -73,8 +78,9 @@ const coursesSlice = createSlice({
   },
 });
 
-export const { addCourse } = coursesSlice.actions;
+export const { addCourse, initStatusPostCourse } = coursesSlice.actions;
 export const selectCourses = (state) => state.courses.courses;
-export const selectStatusCallApiCourses = (state) => state.courses.selectStatusCallApiCourses;
+export const selectStatusCallApiCourses = (state) => state.courses.statusCallApiCourses;
+export const selectStatusPostCourse = (state) => state.courses.statusPostCourse;
 
 export default coursesSlice.reducer;
