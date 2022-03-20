@@ -9,7 +9,7 @@ const WrapperNav = styled.div`
   /* background: #1f1f1f; */
   background: #228be6;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  padding: 1rem 2rem;
+  padding: 1rem;
 `;
 
 const Container = styled.div`
@@ -35,6 +35,7 @@ const TitleApp = styled.h1`
   flex: 2;
   text-align: left;
   color: white;
+  margin: 0;
 `;
 
 const Link = styled(NavLink)`
