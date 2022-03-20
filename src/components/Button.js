@@ -9,6 +9,7 @@ const Btn = styled.button`
   padding: 1.5em 3em;
   border-radius: 2em;
   border: none;
+  min-width: 10rem;
   background-color: greenyellow;
   color: #1f1f1f;
   background: ${(props) => (props.accent ? 'greenyellow' : '#228be6')};
@@ -23,8 +24,10 @@ const Btn = styled.button`
   }
 `;
 
-const Button = ({ children, accent, clickBtn }) => (
-  <Btn accent={accent} onClick={clickBtn}>
+const Button = ({
+  children, accent, clickBtn, type,
+}) => (
+  <Btn accent={accent} onClick={clickBtn} type={type}>
     {children}
   </Btn>
 );
@@ -33,11 +36,13 @@ Button.propTypes = {
   children: PropTypes.string.isRequired,
   accent: PropTypes.bool,
   clickBtn: PropTypes.func,
+  type: PropTypes.string,
 };
 
 Button.defaultProps = {
   accent: false,
   clickBtn: () => {},
+  type: 'button',
 };
 
 export default Button;
