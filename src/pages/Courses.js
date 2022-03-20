@@ -1,66 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import { useSelector, useDispatch } from 'react-redux';
-import Button from '../components/Button';
+import {
+  Button,
+  Card,
+  Wrapper,
+  Form,
+  ContainerInputs,
+  ContainerCards,
+} from '../components';
 import { selectTutors } from '../redux/tutors/tutors';
 import {
   selectCourses,
   addCourse,
+  initStatusPostCourse,
   fetchPostCourse,
+  selectStatusPostCourse,
 } from '../redux/courses/courses';
-import Card from '../components/Card';
-
-const WrapperCourses = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem 2rem;
-`;
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  flex: 1;
-  width: 50%;
-  min-width: 18rem;
-  max-width: 30rem;
-  @media (min-width: 600px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-
-  input,
-  textarea,
-  select {
-    padding: 1em;
-  }
-
-  textarea {
-    min-height: 6rem;
-  }
-`;
-
-const ContainerCards = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  max-width: 60rem;
-  margin-top: 2rem;
-  gap: 1rem;
-  @media (min-width: 600px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-  }
-`;
-
-const ContainerInputs = styled.div`
-  display: flex;
-  flex: ${(props) => props.flexNumber};
-  flex-direction: column;
-  gap: 1rem;
-`;
 
 const Span = styled.span`
   background-color: ${(props) => (props.badgeColor ? '#e67700' : 'yellowgreen')};
@@ -84,11 +41,13 @@ const time = [
 const Courses = () => {
   const tutors = useSelector(selectTutors);
   const courses = useSelector(selectCourses);
+  const statusPostCourse = useSelector(selectStatusPostCourse);
   const [nameCourse, setnameCourse] = useState('');
   const [tutorCourse, settutorCourse] = useState('');
   const [dateCourse, setdateCourse] = useState('2022-03-19');
   const [hourCourse, sethourCourse] = useState('7:00-8:00');
   const [descriptionCourse, setdescriptionCourse] = useState('');
+  const [newCourse, setnewCourse] = useState({});
   const [hourConflic, sethourConflic] = useState(false);
 
   const dispatch = useDispatch();
@@ -101,6 +60,14 @@ const Courses = () => {
     setdescriptionCourse('');
     sethourConflic(false);
   };
+
+  useEffect(() => {
+    if (statusPostCourse === 'Create') {
+      dispatch(addCourse(newCourse));
+      dispatch(initStatusPostCourse());
+      clearFields();
+    }
+  }, [statusPostCourse]);
 
   const handleAddCourse = (e) => {
     e.preventDefault();
@@ -118,17 +85,14 @@ const Courses = () => {
     ) {
       sethourConflic(true);
     } else {
-      sethourConflic(false);
-      dispatch(
-        addCourse({
-          name: nameCourse,
-          tutor: tutor.name,
-          tutor_sn: tutor.tutor_sn,
-          date: dateCourse,
-          hour: hourCourse,
-          description: descriptionCourse,
-        }),
-      );
+      setnewCourse({
+        name: nameCourse,
+        tutor: tutor.name,
+        tutor_sn: tutor.tutor_sn,
+        date: dateCourse,
+        hour: hourCourse,
+        description: descriptionCourse,
+      });
       dispatch(
         fetchPostCourse({
           name: nameCourse,
@@ -139,12 +103,12 @@ const Courses = () => {
           description: descriptionCourse,
         }),
       );
-      clearFields();
+      sethourConflic(false);
     }
   };
 
   return (
-    <WrapperCourses>
+    <Wrapper>
       <h3>Courses</h3>
       <Form onSubmit={handleAddCourse}>
         <ContainerInputs flexNumber={2}>
@@ -169,7 +133,7 @@ const Courses = () => {
             ))}
           </select>
         </ContainerInputs>
-        <ContainerInputs flexNumber={1}>
+        <ContainerInputs flexNumber={2}>
           <input
             type="date"
             value={dateCourse}
@@ -188,9 +152,9 @@ const Courses = () => {
               </option>
             ))}
           </select>
-          {hourConflic && <Span>Select other hour</Span>}
+          <div>{hourConflic && <Span>Select other hour</Span>}</div>
         </ContainerInputs>
-        <ContainerInputs flexNumber={1}>
+        <ContainerInputs flexNumber={2}>
           <textarea
             name="text_area"
             required
@@ -213,7 +177,7 @@ const Courses = () => {
           />
         ))}
       </ContainerCards>
-    </WrapperCourses>
+    </Wrapper>
   );
 };
 
