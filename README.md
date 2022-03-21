@@ -1,10 +1,56 @@
-# Getting Started with Create React App
+![React](https://img.shields.io/badge/-React-1f1f1f?logo=react&logoColor=61DAFB&style=for-the-badge)
+![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white)
+![Styled-Components](https://img.shields.io/badge/Styled_Components-fbfbfb?style=for-the-badge&logo=styled-components&logoColor=DB7093)
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Learning Plataform
+
+![hendridg](https://img.shields.io/badge/hendridg-develoment-green)
+
+> "Learning Plataform", this project use `json-server` to mock API, this learning plataform have Courses, Tutors, Students and Query pages, make with React and Styled-Components
+
+> Desktop Design
+
+![screenshot](./screenshot-01.png)
+![screenshot](./screenshot-01-1.png)
+
+> Mobile Design
+
+![screenshot](./screenshot-02.png)
+![screenshot](./screenshot-02-1.png)
+
+> Built With
+
+- React
+- Redux
+- Styled-Components
+
+## Getting Started
+
+- Run this command in your OS terminal to get a copy of the project:
+
+  ```
+  https://github.com/hendridg/learning-plataform-client
+
+  ```
+
+- Open the folder project from your code editor.
+
+### Prerequisites
+
+- GIT
+
+### Setup
+
+- Clone the repository in order to get a copy of this project
+
+Open a terminal or a git bash in the desired directory and run `https://github.com/hendridg/learning-plataform-client`
 
 ## Available Scripts
 
 In the project directory, you can run:
+
+### Before run project start the server with `npx json-server --watch data/db.json --port 8000`
 
 ### `npm start`
 
@@ -39,32 +85,29 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-## Learn More
+## Authors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+👤 **Hendrid Gonzalez**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- GitHub: [@hendridg](https://github.com/hendridg)
+- Twitter: [@hendridg](https://twitter.com/hendridg)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/hendridg)
 
-### Code Splitting
+## 🤝 Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Contributions, issues, and feature requests are welcome!
 
-### Analyzing the Bundle Size
+Feel free to check the [issues page](https://github.com/hendridg/portfolio/issues).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Show your support
 
-### Making a Progressive Web App
+Give a ⭐️ if you like this project!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Acknowledgments
 
-### Advanced Configuration
+- https://fontawesome.com/icons/ and https://www.svgrepo.com/vectors to free cool icons 😎.
+- 💅 Design by my own inspiration 🤗, the markup made it in https://excalidraw.com/
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📝 License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is [MIT](./MIT.md) licensed.
