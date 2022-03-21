@@ -10,7 +10,7 @@
       "id": 1
     },
     {
-      "name": "gardening",
+      "name": "Gardening",
       "tutor": "Clint Eastwood",
       "tutor_sn": "123456",
       "date": "2022-03-23",
@@ -19,7 +19,7 @@
       "id": 2
     },
     {
-      "name": "woodwork",
+      "name": "Woodwork",
       "tutor": "Lee Van Cleef",
       "tutor_sn": "023894809",
       "date": "2022-03-24",
@@ -28,7 +28,7 @@
       "id": 3
     },
     {
-      "name": "gardering",
+      "name": "Gardering",
       "tutor": "Lee Van Cleef",
       "tutor_sn": "023894809",
       "date": "2022-03-23",
@@ -87,17 +87,104 @@
     {
       "id": 1,
       "name": "Lady Novel",
-      "student_sn": "34532"
+      "student_sn": "34532",
+      "courses": [
+        {
+          "id": 3,
+          "name": "Woodwork",
+          "date": "2022-03-24",
+          "hour": "9:00-10:00",
+          "tutor": "Lee Van Cleef",
+          "tutor_sn": "023894809",
+          "description": "Woodwork courses, craft kits and handcrafted gifts · Art: framing and mounting · DIY and home maintenance · Natural home and eco products"
+        },
+        {
+          "id": 4,
+          "name": "Gardering",
+          "date": "2022-03-23",
+          "hour": "7:00-8:00",
+          "tutor": "Lee Van Cleef",
+          "tutor_sn": "023894809",
+          "description": "This course is a thorough breakdown of everything that goes into the activity. You will cover a wide range of topics—from planning a garden to maintaining it."
+        },
+        {
+          "id": 2,
+          "name": "Gardening",
+          "date": "2022-03-23",
+          "hour": "9:00-10:00",
+          "tutor": "Clint Eastwood",
+          "tutor_sn": "123456",
+          "description": "This course is a thorough breakdown of everything that goes into the activity. You will cover a wide range of topics—from planning a garden to maintaining it."
+        }
+      ]
     },
     {
       "id": 2,
       "name": "Mickey Mouse",
-      "student_sn": "34523456"
+      "student_sn": "34523456",
+      "courses": [
+        {
+          "id": 1,
+          "name": "Italian cuisine",
+          "date": "2022-03-22",
+          "hour": "7:00-8:00",
+          "tutor": "Rada Rassimov",
+          "tutor_sn": "46829739",
+          "description": "Culinary training courses for young foreign chefs, professionals of the restaurant sector and hotel industry, at three-hour drive from Monaco and Venice."
+        },
+        {
+          "id": 3,
+          "name": "woodwork",
+          "date": "2022-03-24",
+          "hour": "9:00-10:00",
+          "tutor": "Lee Van Cleef",
+          "tutor_sn": "023894809",
+          "description": "Woodwork courses, craft kits and handcrafted gifts · Art: framing and mounting · DIY and home maintenance · Natural home and eco products"
+        },
+        {
+          "id": 5,
+          "name": "Italian cuisine",
+          "date": "2022-03-23",
+          "hour": "7:00-8:00",
+          "tutor": "Clint Eastwood",
+          "tutor_sn": "123456",
+          "description": "Culinary training courses for young foreign chefs, professionals of the restaurant sector and hotel industry, at three-hour drive from Monaco and Venice"
+        },
+        {
+          "id": 2,
+          "name": "gardening",
+          "date": "2022-03-23",
+          "hour": "9:00-10:00",
+          "tutor": "Clint Eastwood",
+          "tutor_sn": "123456",
+          "description": "This course is a thorough breakdown of everything that goes into the activity. You will cover a wide range of topics—from planning a garden to maintaining it."
+        }
+      ]
     },
     {
       "id": 3,
       "name": "Goofy",
-      "student_sn": "34532"
+      "student_sn": "34532",
+      "courses": [
+        {
+          "id": 2,
+          "name": "gardening",
+          "date": "2022-03-23",
+          "hour": "9:00-10:00",
+          "tutor": "Clint Eastwood",
+          "tutor_sn": "123456",
+          "description": "This course is a thorough breakdown of everything that goes into the activity. You will cover a wide range of topics—from planning a garden to maintaining it."
+        },
+        {
+          "id": 5,
+          "name": "Italian cuisine",
+          "date": "2022-03-23",
+          "hour": "7:00-8:00",
+          "tutor": "Clint Eastwood",
+          "tutor_sn": "123456",
+          "description": "Culinary training courses for young foreign chefs, professionals of the restaurant sector and hotel industry, at three-hour drive from Monaco and Venice"
+        }
+      ]
     },
     {
       "id": 4,
@@ -117,7 +204,36 @@
     {
       "id": 7,
       "name": "Pepe Le Pew",
-      "student_sn": "01020334532"
+      "student_sn": "01020334532",
+      "courses": [
+        {
+          "id": 3,
+          "name": "Woodwork",
+          "date": "2022-03-24",
+          "hour": "9:00-10:00",
+          "tutor": "Lee Van Cleef",
+          "tutor_sn": "023894809",
+          "description": "Woodwork courses, craft kits and handcrafted gifts · Art: framing and mounting · DIY and home maintenance · Natural home and eco products"
+        },
+        {
+          "id": 5,
+          "name": "Italian cuisine",
+          "date": "2022-03-23",
+          "hour": "7:00-8:00",
+          "tutor": "Clint Eastwood",
+          "tutor_sn": "123456",
+          "description": "Culinary training courses for young foreign chefs, professionals of the restaurant sector and hotel industry, at three-hour drive from Monaco and Venice"
+        },
+        {
+          "id": 1,
+          "name": "Italian cuisine",
+          "date": "2022-03-22",
+          "hour": "7:00-8:00",
+          "tutor": "Rada Rassimov",
+          "tutor_sn": "46829739",
+          "description": "Culinary training courses for young foreign chefs, professionals of the restaurant sector and hotel industry, at three-hour drive from Monaco and Venice."
+        }
+      ]
     },
     {
       "id": 8,
