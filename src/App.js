@@ -4,6 +4,7 @@ import './App.css';
 import { useDispatch } from 'react-redux';
 import { fetchApiCourses } from './redux/courses/courses';
 import { fetchApiTutors } from './redux/tutors/tutors';
+import { fetchApiStudents } from './redux/studens/students';
 import {
   Courses, Tutors, Students, Querys,
 } from './pages';
@@ -15,6 +16,7 @@ const App = () => {
   useEffect(() => {
     dispatch(fetchApiCourses());
     dispatch(fetchApiTutors());
+    dispatch(fetchApiStudents());
   }, []);
 
   return (
