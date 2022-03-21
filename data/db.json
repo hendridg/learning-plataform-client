@@ -35,6 +35,15 @@
       "hour": "7:00-8:00",
       "description": "This course is a thorough breakdown of everything that goes into the activity. You will cover a wide range of topics—from planning a garden to maintaining it.",
       "id": 4
+    },
+    {
+      "name": "Italian cuisine",
+      "tutor": "Clint Eastwood",
+      "tutor_sn": "123456",
+      "date": "2022-03-23",
+      "hour": "7:00-8:00",
+      "description": "Culinary training courses for young foreign chefs, professionals of the restaurant sector and hotel industry, at three-hour drive from Monaco and Venice",
+      "id": 5
     }
   ],
   "tutors": [
