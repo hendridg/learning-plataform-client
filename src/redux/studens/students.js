@@ -33,6 +33,7 @@ export const fetchPostStudent = createAsyncThunk(
 export const fetchPutStudent = createAsyncThunk(
   'students/fetchPutStudent',
   async (student) => {
+    console.log(student);
     const response = await fetch(
       `http://localhost:8000/students/${student.id}`,
       {
@@ -79,7 +80,7 @@ const studentsSlice = createSlice({
         repeatStudent: false,
       };
     },
-    editTutor: (state, action) => {
+    editStudent: (state, action) => {
       // To not repeat the same tutor secure number
       if (
         state.tutors.find(
@@ -111,6 +112,18 @@ const studentsSlice = createSlice({
       return {
         ...state,
         tutors: newStudents,
+      };
+    },
+    addCourseStudent: (state, action) => {
+      const newStudents = state.students.map((student) => {
+        if (student.id === action.payload.id) {
+          return { ...student, courses: action.payload.courses };
+        }
+        return student;
+      });
+      return {
+        ...state,
+        students: newStudents,
       };
     },
     initStatusPostStudent: (state) => ({
@@ -180,6 +193,7 @@ export const {
   addStudent,
   editStudent,
   deleteStudent,
+  addCourseStudent,
   initStatusPostStudent,
   initStatusDeleteStudent,
   initStatusPutStudent,
