@@ -67,7 +67,6 @@ const Students = () => {
   const [coursesOptions, setCoursesOptions] = useState([]);
 
   useEffect(() => {
-    // const coursesOptions = courses.map((course) => course.name);
     setCoursesOptions([...courses]);
     setCourseSelected('');
     setStudentCourses([]);
@@ -75,9 +74,13 @@ const Students = () => {
 
   useEffect(() => {
     if (coursesOptions.length > 0) {
-      const restOfCourses = coursesOptions.filter(
-        (course) => course.id !== +courseSelected,
-      );
+      const objCourseSelected = courses[courseSelected - 1];
+      const restOfCourses = coursesOptions
+        .filter((course) => course.id !== objCourseSelected.id)
+        .filter(
+          (course) => `${course.date}${course.hour}`
+            !== `${objCourseSelected.date}${objCourseSelected.hour}`,
+        );
       setCoursesOptions(restOfCourses);
     }
   }, [courseSelected]);
