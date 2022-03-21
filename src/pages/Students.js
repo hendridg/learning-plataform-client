@@ -155,7 +155,7 @@ const Students = () => {
                     ]);
                   }}
                 >
-                  <option>selec course</option>
+                  <option>select course</option>
                   {coursesOptions.map((course) => (
                     <option key={course.id} value={course.id}>
                       {`${course.name} by ${course.tutor}`}
