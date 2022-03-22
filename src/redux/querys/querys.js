@@ -36,5 +36,6 @@ const querysSlice = createSlice({
 // export const {} = querysSlice.actions;
 
 export const selectStatusCoursesByDay = (state) => state.querys.statusApiCoursesByDay;
+export const selectCoursesByDay = (state) => state.querys.coursesByDays;
 
 export default querysSlice.reducer;
