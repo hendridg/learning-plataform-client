@@ -6,12 +6,23 @@ const initialState = {
   statusDeleteStudent: 'idle',
   statusPutStudent: 'idle',
   students: [],
+  coursesByStudent: [],
 };
 
 export const fetchApiStudents = createAsyncThunk(
   'students/fetchApiStudents',
   async () => {
     const response = await fetch('http://localhost:8000/students').then((res) => res.json());
+    return response;
+  },
+);
+
+export const fetchApiCoursesByStudent = createAsyncThunk(
+  'students/fetchApiCoursesByStudent',
+  async (id) => {
+    const response = await fetch(`http://localhost:8000/students/${+id}`).then(
+      (res) => res.json(),
+    );
     return response;
   },
 );
@@ -33,7 +44,6 @@ export const fetchPostStudent = createAsyncThunk(
 export const fetchPutStudent = createAsyncThunk(
   'students/fetchPutStudent',
   async (student) => {
-    console.log(student);
     const response = await fetch(
       `http://localhost:8000/students/${student.id}`,
       {
@@ -157,6 +167,15 @@ const studentsSlice = createSlice({
           students: arrayStudents,
         };
       })
+      .addCase(fetchApiCoursesByStudent.pending, (state) => ({
+        ...state,
+        statusCallApiStudents: 'loading',
+      }))
+      .addCase(fetchApiCoursesByStudent.fulfilled, (state, action) => ({
+        ...state,
+        statusCallApiStudents: 'done',
+        coursesByStudent: action.payload.courses,
+      }))
       .addCase(fetchPostStudent.pending, (state) => ({
         ...state,
         statusPostStudent: 'proccess',
@@ -199,6 +218,7 @@ export const {
   initStatusPutStudent,
 } = studentsSlice.actions;
 export const selectStudents = (state) => state.students.students;
+export const selectCoursesByStudent = (state) => state.students.coursesByStudent;
 export const selectRepeatStudent = (state) => state.students.repeatStudent;
 export const selectStatusCallApiStudents = (state) => state.students.statusCallApiStudents;
 export const selectStatusPostStudent = (state) => state.students.statusPostStudent;
