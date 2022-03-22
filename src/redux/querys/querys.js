@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
   coursesByDays: [],
+  coursesByTutor: [],
   statusApiCoursesByDay: 'idle',
 };
 
@@ -10,6 +11,16 @@ export const fetchApiCoursesByDay = createAsyncThunk(
   async (day) => {
     const response = await fetch(
       `http://localhost:8000/courses/?date=${day}`,
+    ).then((res) => res.json());
+    return response;
+  },
+);
+
+export const fetchApiCoursesByTutor = createAsyncThunk(
+  'querys/fetchApiCoursesByTutor',
+  async (tutor) => {
+    const response = await fetch(
+      `http://localhost:8000/courses/?tutor=${tutor}`,
     ).then((res) => res.json());
     return response;
   },
@@ -29,6 +40,15 @@ const querysSlice = createSlice({
         ...state,
         coursesByDays: action.payload,
         statusApiCoursesByDay: 'done',
+      }))
+      .addCase(fetchApiCoursesByTutor.pending, (state) => ({
+        ...state,
+        statusApiCoursesByTutor: 'loading',
+      }))
+      .addCase(fetchApiCoursesByTutor.fulfilled, (state, action) => ({
+        ...state,
+        coursesByTutor: action.payload,
+        statusApiCoursesByTutor: 'done',
       }));
   },
 });
@@ -37,5 +57,6 @@ const querysSlice = createSlice({
 
 export const selectStatusCoursesByDay = (state) => state.querys.statusApiCoursesByDay;
 export const selectCoursesByDay = (state) => state.querys.coursesByDays;
+export const selectCoursesByTutor = (state) => state.querys.coursesByTutor;
 
 export default querysSlice.reducer;
