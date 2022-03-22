@@ -3,10 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchApiCourses, selectCourses } from '../redux/courses/courses';
 import { fetchApiTutors, selectTutors } from '../redux/tutors/tutors';
-import { fetchApiStudents, selectStudents } from '../redux/studens/students';
+import {
+  fetchApiStudents,
+  selectStudents,
+  selectCoursesByStudent,
+  fetchApiCoursesByStudent,
+} from '../redux/studens/students';
 import {
   fetchApiCoursesByDay,
+  fetchApiCoursesByTutor,
   selectCoursesByDay,
+  selectCoursesByTutor,
 } from '../redux/querys/querys';
 import {
   Wrapper,
@@ -22,9 +29,13 @@ const Querys = () => {
   const courses = useSelector(selectCourses);
   const tutors = useSelector(selectTutors);
   const coursesByDay = useSelector(selectCoursesByDay);
+  const coursesByStudent = useSelector(selectCoursesByStudent);
   const students = useSelector(selectStudents);
+  const coursesByTutor = useSelector(selectCoursesByTutor);
   const [dateCourses, setDateCourses] = useState([]);
   const [dateQuery, setDateQuery] = useState('');
+  const [tutorQuery, setTutorQuery] = useState('');
+  const [studentQuery, setStudentQuery] = useState('');
 
   useEffect(() => {
     dispatch(fetchApiCourses());
@@ -52,26 +63,42 @@ const Querys = () => {
       <h2>Querys</h2>
       <Form>
         <ContainerInputs>
-          <select>
-            <option>select course</option>
-            {courses.map((course) => (
-              <option key={course.id}>
-                {`${course.name} by ${course.tutor}`}
+          <p style={styleP}>Query courses by student</p>
+          <select
+            value={studentQuery}
+            onChange={({ target }) => setStudentQuery(target.value)}
+          >
+            <option>select student</option>
+            {students.map((student) => (
+              <option key={student.id} value={student.id}>
+                {student.name}
               </option>
             ))}
           </select>
-          <select>
+          <Button
+            type="button"
+            clickBtn={() => dispatch(fetchApiCoursesByStudent(studentQuery))}
+          >
+            query
+          </Button>
+        </ContainerInputs>
+        <ContainerInputs>
+          <p style={styleP}>Query courses by tutor</p>
+          <select
+            value={tutorQuery}
+            onChange={({ target }) => setTutorQuery(target.value)}
+          >
             <option>select tutor</option>
             {tutors.map((tutor) => (
               <option key={tutor.id}>{tutor.name}</option>
             ))}
           </select>
-          <select>
-            <option>select student</option>
-            {students.map((student) => (
-              <option key={student.id}>{student.name}</option>
-            ))}
-          </select>
+          <Button
+            type="button"
+            clickBtn={() => dispatch(fetchApiCoursesByTutor(tutorQuery))}
+          >
+            query
+          </Button>
         </ContainerInputs>
         <ContainerInputs>
           <p style={styleP}>Query courses by day</p>
@@ -93,19 +120,56 @@ const Querys = () => {
         </ContainerInputs>
       </Form>
       <div>
-        {coursesByDay.length > 0 && (
-          <ContainerCards>
-            {coursesByDay.map((course) => (
-              <Card
-                key={course.id}
-                name={course.name}
-                tutor={course.tutor}
-                description={course.description}
-                day={course.date}
-                hour={course.hour}
-              />
-            ))}
-          </ContainerCards>
+        {coursesByDay?.length > 0 && (
+          <>
+            <p>{`Courses of ${dateQuery}`}</p>
+            <ContainerCards>
+              {coursesByDay.map((course) => (
+                <Card
+                  key={course.id}
+                  name={course.name}
+                  tutor={course.tutor}
+                  description={course.description}
+                  day={course.date}
+                  hour={course.hour}
+                />
+              ))}
+            </ContainerCards>
+          </>
+        )}
+        {coursesByTutor?.length > 0 && (
+          <>
+            <p>Courses of tutor</p>
+            <ContainerCards>
+              {coursesByTutor.map((course) => (
+                <Card
+                  key={course.id}
+                  name={course.name}
+                  tutor={course.tutor}
+                  description={course.description}
+                  day={course.date}
+                  hour={course.hour}
+                />
+              ))}
+            </ContainerCards>
+          </>
+        )}
+        {coursesByStudent?.length > 0 && (
+          <>
+            <p>Courses of student</p>
+            <ContainerCards>
+              {coursesByStudent.map((course) => (
+                <Card
+                  key={course.id}
+                  name={course.name}
+                  tutor={course.tutor}
+                  description={course.description}
+                  day={course.date}
+                  hour={course.hour}
+                />
+              ))}
+            </ContainerCards>
+          </>
         )}
       </div>
     </Wrapper>
