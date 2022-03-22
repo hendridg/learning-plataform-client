@@ -88,7 +88,7 @@ const Querys = () => {
             type="button"
             clickBtn={() => dispatch(fetchApiCoursesByDay(dateQuery))}
           >
-            go!
+            query
           </Button>
         </ContainerInputs>
       </Form>
